@@ -34,8 +34,8 @@ const buildFilterQuery: any = (filter: any) => {
 
 // TODO Type request and response
 export const listPrograms = async (req: any, res: any, next: any) => {
-  const offset = parseInt(req.query.offset, 10);
-  const pageLimit = parseInt(req.query.limit, 10);
+  const offset = req.query.offset ? parseInt(req.query.offset, 10) : 0;
+  const pageLimit = req.query.offset ? parseInt(req.query.limit, 10) : 5;
   const query = buildFilterQuery(req.query);
   let programs;
   programs = await Program.find(query)
