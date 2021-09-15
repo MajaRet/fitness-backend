@@ -16,13 +16,13 @@ import {
 
 const app = express();
 const port = process.env.PORT || 5000;
+const dbURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/fitnessDB';
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-mongoose.connect('mongodb://localhost:27017/fitnessDB');
+mongoose.connect(dbURI);
 reset_db();
-// const dirname = path.dirname(new URL(import.meta.url).pathname);
 app.get('/api/', (req: any, res: any) => {
   res.send("It's maybe working!");
 });
