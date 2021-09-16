@@ -1,6 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import { reset_db } from './controllers/init_db.js';
+import cors from 'cors';
 
 import { listPrograms } from './controllers/BrowseController.js';
 import {
@@ -20,9 +20,13 @@ const dbURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/fitnessDB';
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(
+  cors({
+    origin: ['http://localhost:3000', 'https://jolly-lewin-397b5d.netlify.app'],
+  })
+);
 
 mongoose.connect(dbURI);
-reset_db();
 app.get('/api/', (req: any, res: any) => {
   res.send("It's maybe working!");
 });
